@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, {useState} from 'react';
 import { Fugaz_One } from 'next/font/google'
 import { baseRating, gradients } from '@/utils';
 const months = {
@@ -18,21 +19,36 @@ const months = {
 
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400'] });
 
-const now = new Date();
-const dayList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const data = {
-  "15": 2, "16": 4, "17": 1, "18": 3, "19": 5, "20": 2, "21": 4, "22": 1, "23": 3, "24": 5
-}
-
 export default function Calendar(props) {
-  const { demo } = props
-  const year = 2025;
-  const month = 'June';
+  const { demo, completeData, handleSetMood } = props
+  const now = new Date()
+  const currMonth = now.getMonth()
+  const [selectedMonth, setSelectedMonth] = useState(Object.keys(months)[currMonth])
+  const [selectedYear, setSelectedYear] = useState(now.getFullYear())
+  
+  const numericMonth = Object.keys(months).indexOf(selectedMonth);
+  const data = completeData?.[selectedYear]?.[numericMonth] || {};
+  
+  function handleIncrementMonth(val) {
+      // value +1 -1
+      // if we hit the bounds of the months, then we can just adjust the year that is displayed instead
+      if (numericMonth + val < 0) {
+          // set month value = 11 and decrement the year
+          setSelectedYear(curr => curr - 1)
+          setSelectedMonth(months[months.length - 1])
+      } else if (numericMonth + val > 11) {
+          // set month val = 0 and increment the year
+          setSelectedYear(curr => curr + 1)
+          setSelectedMonth(months[0])
+      } else {
+          setSelectedMonth(months[numericMonth + val])
+      }
+  }
 
-  const monthIndex = Object.keys(months).indexOf(month);
-  const monthNow = new Date(year, monthIndex, 1);
+  const monthIndex = Object.keys(months).indexOf(selectedMonth);
+  const monthNow = new Date(selectedYear, monthIndex, 1);
   const firstDayofMonth = monthNow.getDay();
-  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+  const daysInMonth = new Date(selectedYear, monthIndex + 1, 0).getDate();
   const totalCells = firstDayofMonth + daysInMonth;
   const numRows = Math.ceil(totalCells / 7);
 
@@ -44,13 +60,13 @@ export default function Calendar(props) {
         const isToday =
           isValidDay &&
           dayNumber === now.getDate() &&
-          month === now.toLocaleString('default', { month: 'long' }) &&
-          year === now.getFullYear();
+          selectedMonth === now.toLocaleString('default', { month: 'long' }) &&
+          selectedYear === now.getFullYear();
 
         const color = demo
           ? gradients.indigo[baseRating[dayNumber]] || 'white'
           : dayNumber in data
-          ? gradients.indigo[data[dayNumber]]
+          ? gradients.indigo[data[dayNumber] - 1]
           : 'white';
 
         return (
