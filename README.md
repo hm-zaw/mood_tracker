@@ -70,3 +70,6 @@ Make sure you have the following installed:
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Demo Link: [https://moodoshii.netlify,app](https://moodoshii.netlify.app)
+![image](https://github.com/user-attachments/assets/795b016c-12f4-40e2-bb16-89523b88e385)
+
+Created by HMZ 🩷
