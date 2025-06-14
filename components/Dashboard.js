@@ -1,12 +1,13 @@
 'use client'
+import Loading from './Loading'
+import Login from './Login'
+import Calendar from './Calendar'
 import React, { useEffect, useState } from 'react'
 import { Fugaz_One } from 'next/font/google'
 import { Open_Sans } from 'next/font/google'
-import Calendar from './Calendar'
 import { useAuth } from '@/context/AuthContext'
 import { doc, setDoc } from 'firebase/firestore'
-import Loading from './Loading'
-import Login from './Login'
+import { db } from '@/firebase'
 
 export default function Dashboard() {
   const { currentUser, userDataObj, setUserDataObj, loading } = useAuth() 
@@ -60,6 +61,7 @@ export default function Dashboard() {
           }
         }
       }, { merge: true })
+      console.log("result for setDoc", res)
     } catch (error) {
       console.log("Failed to set data", error.message)
     }

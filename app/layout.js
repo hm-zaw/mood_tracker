@@ -2,6 +2,7 @@ import { Fugaz_One, Geist, Geist_Mono, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Head from "./head";
+import Logout from "@/components/Logout";
 
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400']})
 const opensans = Open_Sans({ subsets: ["latin"], weight: ['400']})
@@ -15,9 +16,7 @@ export default function RootLayout({ children }) {
   const header = (
     <header className="flex items-center justify-between gap-4 p-4 sm:p-8">
       <h1 className={`${fugaz.className} text-xl sm:text-2xl md:text-3xl text-gradient`}>Moodoshii</h1>
-      <div className="flex items-center justify-between">  
-        PLACEHOLDER CTA || STATS
-      </div>
+      <Logout />
     </header>
   )
   const footer = (
