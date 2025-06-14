@@ -13,7 +13,7 @@ A simple and intuitive web application to track your daily moods. Keep a record 
 
 * **Frontend Framework:** [Next.js](https://nextjs.org/)
 * **Backend/Database:** [Firebase](https://firebase.google.com/) (Firestore for database, Authentication for user management)
-* **Styling:** (You can add specific CSS frameworks here if you used any, e.g., Tailwind CSS, Material UI, styled-components, or just "Custom CSS")
+* **Styling:** TailwindCss
 
 ## ⚙️ Installation & Setup
 
