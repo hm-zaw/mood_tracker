@@ -37,7 +37,7 @@ export default function Login() {
   return (
     <div className='flex flex-col flex-1 justify-center items-center gap-4'>
       <h3 className={`px-20 sm:px-28 md:px-32 font-fugaz text-4xl sm:text-5xl md:text-6xl text-center`}>{isRegister ? 'Register' : 'Login'} </h3>
-      <p> You're one step away! </p>
+      
       <input value={email} onChange={(e) => { setEmail(e.target.value) }}
         className='w-full max-w-[500px] mx-auto px-4 py-2 sm:py-3 rounded-lg border border-indigo-600 focus:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300' 
         placeholder='Email' 
@@ -49,7 +49,9 @@ export default function Login() {
       <div className='w-full max-w-[500px] mx-auto'>
         <Button clickHandler={handleSubmit} text={authenticating ? 'Submitting' : "Submit"} full/>
       </div>
-      <p> {isRegister ? "Already have an account?" : "Don't have an account?"}  <button onClick={() => setIsRegister(!isRegister)} className='text-indigo-600'> {isRegister ? 'Sign in' : 'Sign up'} </button></p>
+      <p> {isRegister ? "Already have an account?" : "Don't have an account?"}  
+        <button onClick={() => setIsRegister(!isRegister)} className='text-indigo-600'> {isRegister ? 'Sign in' : 'Sign up'} </button>
+      </p>
     </div>
   )
 }
